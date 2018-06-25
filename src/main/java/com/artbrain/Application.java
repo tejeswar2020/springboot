@@ -38,6 +38,7 @@ public class Application extends WebMvcConfigurerAdapter {
     registry.addViewController("/").setViewName("home");
     registry.addViewController("/error").setViewName("error");
     registry.addViewController("/profile").setViewName("profile");
+    registry.addViewController("/test").setViewName("test");
   }
 
   @Bean
