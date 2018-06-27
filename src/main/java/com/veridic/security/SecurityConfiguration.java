@@ -1,4 +1,4 @@
-package com.artbrain.security;
+package com.veridic.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

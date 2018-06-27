@@ -1,91 +1,227 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Spring Boot</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="webjars/bootstrap/3.2.0/css/bootstrap.min.css"
-          rel="stylesheet" media="screen"/>
-    <link href="../static/css/styles.css"
-          th:href="@{css/styles.css}"
-          rel="stylesheet"
-          media="screen"/>
+<meta charset="UTF-8" />
+<title>Home | Veridic Solutions LLc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="webjars/bootstrap/3.2.0/css/bootstrap.min.css"
+	rel="stylesheet" media="screen" />
+<link href="../static/css/styles.css" th:href="@{css/styles.css}"
+	rel="stylesheet" media="screen" />
 </head>
-<body class="background"
-      style="background: url('../static/img/background.png') no-repeat center center fixed;"
-      th:style="'background: url(' + @{/img/background.png} + ') no-repeat center center fixed;'">
-<nav class="navbar">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a name="header" class="navbar-brand" href="#">
-                Logged as :
-                <span sec:authentication="name"></span>
-                Role :
-                <span sec:authorize="hasRole('ROLE_ADMIN')">admin</span>
-                <span sec:authorize="hasRole('ROLE_USER')">user</span>
-            </a>
-        </div>
-        <ul class="navbar-header pull-right">
-      		<a name="header" href="test" class="navbar-brand"><span class="glyphicon glyphicon-user"></span> Test</a>
-            <a name="header" href="profile" class="navbar-brand"><span class="glyphicon glyphicon-user"></span> Profile</a>
-            <a name="header" href="logout" class="navbar-brand"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
-        </ul>
-    </div>
-</nav>
-<div class="container">
-    <h2 class="centered">In this project I used:</h2>
-    <div class="row">
-        <div class="col-xs-6 col-md-3">
-            <div class="thumbnail">
-                <a href="http://projects.spring.io/spring-boot/" target="_blank">
-                    <img alt="100%x200" src="../static/img/spring_boot.gif" th:src="@{img/spring_boot.gif}"/>
-                </a>
-                <div class="caption">
-                    <h3>Spring Boot</h3>
-                    <p>Takes an opinionated view of building production-ready Spring applications.
-                        Spring Boot favors convention over configuration and is designed to get you up and running as quickly as possible.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-            <div class="thumbnail">
-                <a href="http://projects.spring.io/spring-framework/" target="_blank">
-                    <img alt="100%x200" src="../static/img/spring_framework.gif" th:src="@{img/spring_framework.gif}"/>
-                </a>
-                <div class="caption">
-                    <h3>Spring Framework</h3>
-                    <p>Core support for dependency injection, transaction management, web applications, data access, messaging, testing and more.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-            <div class="thumbnail">
-                <a href="http://projects.spring.io/spring-security/" target="_blank">
-                    <img alt="100%x200" src="../static/img/spring_security.gif" th:src="@{img/spring_security.gif}"/>
-                </a>
-                <div class="caption">
-                    <h3>Spring Security</h3>
-                    <p>Spring Security is a powerful and highly customizable authentication and access-control framework.
-                        It is the de-facto standard for securing Spring-based applications.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-            <div class="thumbnail">
-                <a href="http://www.thymeleaf.org/" target="_blank">
-                    <img alt="100%x200" src="../static/img/thymeleaf.gif" th:src="@{img/thymeleaf.gif}"/>
-                </a>
-                <div class="caption">
-                    <h3>Thymeleaf</h3>
-                    <p>Thymeleaf is a Java library.
-                        It is a template engine capable of processing and generating HTML, XML, JavaScript, CSS and text, and can work both in web and non-web environments.
-                        It is better suited for serving the view layer of web applications, but it can process files in many formats, even in offline environments.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+<body>
+	<nav class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Veridic Solutions LLc.</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="/">Home</a></li>
+					<li><a href="/timesheet">Time sheets</a></li>
+					<li><a href="/expenses">Expenses</a></li>
+					<li><a href="/absenceManagement">Absence Management</a></li>
+					<li><a href="#contact"><span
+							sec:authorize="hasRole('ROLE_ADMIN')">Employees</span></a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="./"> <span
+							class="glyphicon glyphicon-th-large"></span></a></li>
+					<li class="dropdown"><a href="./" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-haspopup="true"
+						aria-expanded="false">Logged as : <span
+							sec:authentication="name"></span> <span
+							sec:authorize="hasRole('ROLE_ADMIN')">(Admin)</span> <span
+							sec:authorize="hasRole('ROLE_USER')">(User)</span> <span
+							sec:authorize="hasRole('ROLE_HR')">(HR Manager)</span> <span
+							sec:authorize="hasRole('ROLE_SUPERADMIN')">(Super Admin)</span> <span
+							class="sr-only">(current)</span> <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">My Documents</li>
+							<li role="separator" class="divider"></li>
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">My Settings</li>
+							<li role="separator" class="divider"></li>
+							<li><a name="header" href="profileDisplay"
+								class="navbar-brand"><span class="glyphicon glyphicon-user"></span>
+									Profile</a></li>
+							<li><a name="header" href="logout" class="navbar-brand"><span
+									class="glyphicon glyphicon-off"></span> Logout</a></li>
+						</ul></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</nav>
 
-</div>
+	<div class="container">
+		<form>
+			<h1>My Info</h1>
+
+			<div class="tile-emp-info">
+				<div class="panel-body pn">
+					<div class="widget-pad">
+						<div class="col-md-12 col-lg-12">
+							<div class="col-md-6 col-lg-3" style="padding-left: 0">
+								<div class="col-md-6 col-lg-3 np">
+									<div id="img_preview">
+										<img
+											src="/companies_data/3572/upload/thumb_14966912490160509-WA0002.jpg"
+											border="0" class="img-responsive" alt="Employee" />
+									</div>
+									<a class="img_change" href="javascript:void(0)"><i
+										class="fa fa-pencil fakeBrowse"></i> </a>
+								</div>
+								<form id="emp_personal_details" method="post"
+									enctype="multipart/form-data" action="/Employees/add_emp_photo">
+									<input type="file" class="photoimg inputFile" name="photoimg"
+										id="photoimg" style="display: none !important" /> <input
+										type="hidden" id="filename" readonly="true" value="" /> <input
+										type="hidden" name="employee_id" id="employee_id"
+										value="19259" /> <input type="hidden"
+										name="preview_image_name" id="preview_image_name" value="" />
+									<input type="hidden" name="actual_image_name"
+										id="actual_image_name" value="" />
+								</form>
+
+								<div class="col-md-6 col-lg-9 shot_details pt-0">
+									<p class="fw600">
+										Pavan Manikanta Rekapalli <span class="designation"> HR
+											Manager </span>
+										<!-- code for display job title -->
+										<!-- code end for display job title -->
+									</p>
+									<p>Emp-Id : EC120</p>
+									<p class="mobile_no">9378384606</p>
+
+									<p class="email_id">prekapal7@gmail.com</p>
+									<!-- <p class="office_no"><i class="fa fa-phone"></i> : 040 - 23459821</p> -->
+
+								</div>
+
+								<div
+									class="col-md-12 col-lg-12 shot_details user_description np margin-10t add_custom_scrollbar">
+									<span id="empDescriptionCnt" class="more_text"> </span> <a
+										href="/dashboard_tile_manager/DashboardTiles/add_employee_description"
+										id="editEmpDescription" class="add-description"
+										title="Add About yourself.">Add About Yourself</a>
+								</div>
+								<!-- code Added by Ayyappa for org short link-->
+								<!--<div class="cl">-->
+
+								<!--</div>-->
+								<!-- code end by Ayyappa for org short link-->
+							</div>
+							<div class="col-md-6 col-lg-9">
+								<div class="col-md-6 pt-0 grablr">
+									<div class="col-md-12 margin-5b pt-0">
+										<h4>Timesheets</h4>
+										<p class="well nm clearfix">You don't have any timesheets
+											to submit for current month</p>
+									</div>
+									<div class="col-md-12 margin-5b">
+										<h4>Status Report</h4>
+										<p class="well nm clearfix">You don't have any status
+											reports to submit</p>
+									</div>
+									<!-- code by ayyappa-->
+									<div class="col-md-12">
+										<h4>Organization Documents</h4>
+										<p class="well nm clearfix">
+											Gives access to the documents shared with you <a
+												href="/employee_self_service_update/organisationalDocuments?module=1"
+												type="3" class="org_doc_link dbBtn pull-right">View
+												Documents</a>
+										</p>
+
+									</div>
+									<!-- code end by ayyappa-->
+								</div>
+								<div class="col-md-6 pt-0">
+									<div class="col-md-12 pt-0">
+										<div class="data-table dataTable">
+											<h4>Key Dates</h4>
+											<table width="100%" cellspacing="0" cellpadding="0"	border="0" class="data-table dataTable">
+
+												<thead>
+													<tr>
+														<th>Type</th>
+														<th>Status</th>
+														<th>Approved From</th>
+														<th>Approved Till</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>Passport</td>
+														<td>Active</td>
+														<td>07/11/2013</td>
+														<td>06/11/2023</td>
+													</tr>
+													<tr>
+														<td>I-94</td>
+														<td>Active</td>
+														<td>07/30/2014</td>
+														<td>06/18/2019</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="data-table dataTable col-md-12 margin-20t cl"
+								style="padding-left: 0; padding-right: 0">
+								<h4>Active Placements</h4>
+								<table width="100%" cellspacing="0" cellpadding="0" border="0"
+									class="data-table dataTable">
+
+									<thead>
+										<tr>
+											<th>Job Code</th>
+											<th>Title</th>
+											<th>End Client</th>
+											<th>Start Date</th>
+											<!-- <th>End Date</th> -->
+										</tr>
+									</thead>
+									<tbody>
+
+										<tr>
+											<td>Job Code-185</td>
+											<td>UI Developer</td>
+											<td>Quest Global Services INC</td>
+											<td>01/31/2018</td>
+										</tr>
+										<tr>
+											<td>Job Code-10</td>
+											<td>AWS DevOps Engineer</td>
+											<td>Newstar Corporation LLC</td>
+											<td>06/19/2017</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
 <script src="webjars/jquery/2.1.1/jquery.min.js"></script>
 <script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>

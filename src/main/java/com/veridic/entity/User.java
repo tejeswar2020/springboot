@@ -1,4 +1,4 @@
-package com.artbrain.entity;
+package com.veridic.entity;
 
 public class User {
 

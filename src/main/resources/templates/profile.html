@@ -1,88 +1,249 @@
-
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Static Top Navbar Example for Bootstrap</title>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8" />
+<title>Profile | Veridic Solutions LLc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="webjars/bootstrap/3.2.0/css/bootstrap.min.css"
+	rel="stylesheet" media="screen" />
+<link href="../static/css/styles.css" th:href="@{css/styles.css}"
+	rel="stylesheet" media="screen" />
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Veridic Solutions LLc.</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="/">Home</a></li>
+					<li><a href="/timesheet">Time sheets</a></li>
+					<li><a href="/expenses">Expenses</a></li>
+					<li><a href="/absenceManagement">Absence Management</a></li>
+					<li><a href="/contact"><span
+							sec:authorize="hasRole('ROLE_ADMIN')">Employees</span></a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="./"> <span
+							class="glyphicon glyphicon-th-large"></span></a></li>
+					<li class="active dropdown"><a href="./"
+						class="dropdown-toggle" data-toggle="dropdown" role="button"
+						aria-haspopup="true" aria-expanded="false">Logged as : <span
+							sec:authentication="name"></span> <span
+							sec:authorize="hasRole('ROLE_ADMIN')">(Admin)</span> <span
+							sec:authorize="hasRole('ROLE_USER')">(User)</span> <span
+							sec:authorize="hasRole('ROLE_HR')">(HR Manager)</span> <span
+							sec:authorize="hasRole('ROLE_SUPERADMIN')">(Super Admin)</span> <span
+							class="sr-only">(current)</span> <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">My Documents</li>
+							<li role="separator" class="divider"></li>
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">My Settings</li>
+							<li role="separator" class="divider"></li>
+							<li><a name="header" href="profileDisplay" class="navbar-brand"><span
+									class="glyphicon glyphicon-user"></span> Profile</a></li>
+							<li><a name="header" href="logout" class="navbar-brand"><span
+									class="glyphicon glyphicon-off"></span> Logout</a></li>
+						</ul></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</nav>
 
-    <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+	<div class="container" th:if="${param.profileDisplay}">
+		<form th:action="@{/profileUpdate}" method="post">
+		<fieldset>
+			<h1>Consultant Details</h1>
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet" />
+			<div class="contentform">
+				<div id="sendmessage">Your message has been sent successfully.
+					Thank you.</div>
+				<div class="leftcontact">
+				<input type="submit" class="btn btn-lg btn-primary btn-block" value="Update" />
+				<div class="form-group">
+					<legend>Personal Details</legend>
+						<p>
+							User Name<span>*</span>
+						</p>
+						<span class="icon-case"><i class="fa fa-male"></i></span> <input
+							type="text" name="userName" id="userName" readonly="readonly" data-rule="required"
+							data-msg="Vérifiez votre saisie sur les champs : Le champ 'Nom' doit être renseigné." />
+						<div class="validation"></div>
+					</div>
+					<div class="form-group">
+					<legend>Personal Details</legend>
+						<p>
+							Surname<span>*</span>
+						</p>
+						<span class="icon-case"><i class="fa fa-male"></i></span> <input
+							type="text" name="surname" id="nom" data-rule="required"
+							data-msg="Vérifiez votre saisie sur les champs : Le champ 'Nom' doit être renseigné." />
+						<div class="validation"></div>
+					</div>
 
-    <!-- Custom styles for this template -->
-    <link href="style.css" rel="stylesheet" />
-  </head>
+					<div class="form-group">
+						<p>
+							First Name <span>*</span>
+						</p>
+						<span class="icon-case"><i class="fa fa-user"></i></span> <input
+							type="text" name="firstName" id="prenom" data-rule="required"
+							data-msg="Vérifiez votre saisie sur les champs : Le champ 'Prénom' doit être renseigné." />
+						<div class="validation"></div>
+					</div>
 
-  <body>
+					<div class="form-group">
+						<p>
+							E-mail <span>*</span>
+						</p>
+						<span class="icon-case"><i class="fa fa-envelope-o"></i></span> <input
+							type="email" name="email" id="email" data-rule="email"
+							data-msg="Vérifiez votre saisie sur les champs : Le champ 'E-mail' est obligatoire." />
+						<div class="validation"></div>
+					</div>
 
-    <!-- Static navbar -->
-    <nav class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li>
-            <li><a href="../navbar-fixed-top/">Fixed top</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+					<div class="form-group">
+						<p>
+							Gender <span>*</span>
+						</p>
+						<select name="gender" class="form-control" id="sel1">
+						    <option>Male</option>
+						    <option>Female</option>
+					  	</select>
+						<div class="validation"></div>
+					</div>
+
+					<div class="form-group">
+						<p>
+							Date of Birth <span>*</span>
+						</p>
+						<span class="icon-case"><i class="fa fa-location-arrow"></i></span>
+						<input type="text" name="date" id="adresse"
+							data-rule="required"
+							data-msg="Vérifiez votre saisie sur les champs : Le champ 'Adresse' doit être renseigné." />
+						<div class="validation"></div>
+					</div>
+
+					<div class="form-group">
+						<p>
+							Marital Status <span>*</span>
+						</p>
+						<select class="form-control" name="maritialStatus" id="sel1">
+						    <option>Single</option>
+						    <option>Married</option>
+					  	</select>
+						<div class="validation"></div>
+					</div>
+					
+					<div class="form-group">
+						<p>
+							Cell Phone <span>*</span>
+						</p>
+						<span class="icon-case"><i class="fa fa-comment-o"></i></span> <input
+							type="text" name="cellPhoneNumber" id="sujet" data-rule="required"
+							data-msg="Vérifiez votre saisie sur les champs : Le champ 'Sujet' doit être renseigné." />
+						<div class="validation"></div>
+					</div>
+				</div>
+			</div> 
+			</fieldset>
+		</form>
+	</div>
 
 
-    <div class="container">
-
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-        </p>
-      </div>
-
-    </div> <!-- /container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
+	<div class="container" th:unless="${param.profileDisplay}">
+		<form th:action="@{profile?profileDisplay}" method="get">
+			<fieldset>
+			<h1>Consultant Details</h1>
+				<div class="contentform">
+					<div id="sendmessage">Your message has been sent successfully. Thank you.</div>
+					<div class="leftcontact">
+						<input onclick="location.href='/profile?profileDisplay';" class="btn btn-lg btn-primary btn-block" type="button" value="Edit"/>
+						<tr th:each="message : ${messages}">
+						<div class="form-group">
+							<legend>Personal Details</legend>
+								<p>
+									User Name<span>*</span>
+								</p>
+								<span class="icon-case"><i class="fa fa-male"></i></span><td th:text="${message.userName}"></td>
+								<div class="validation"></div>
+						</div>
+						
+						<div class="form-group">
+							<legend>Personal Details</legend>
+								<p>Surname<span>*</span></p>
+								<span class="icon-case"><i class="fa fa-male"></i></span><td th:text="${message.surname}"></td>
+								<div class="validation"></div>
+						</div>
+	
+						<div class="form-group">
+							<p>First Name <span>*</span></p>
+							<span class="icon-case"><i class="fa fa-user"></i></span><td th:text="${message.firstName}"></td>
+							<div class="validation"></div>
+						</div>
+	
+						<div class="form-group">
+							<p>E-mail <span>*</span></p>
+							<span class="icon-case"><i class="fa fa-envelope-o"></i></span><td th:text="${message.email}"></td>
+							<div class="validation"></div>
+						</div>
+	
+						<div class="form-group">
+							<p>
+								Gender <span>*</span>
+							</p>
+							<td th:text="${message.gender}"></td>
+							<div class="validation"></div>
+						</div>
+	
+						<div class="form-group">
+							<p>
+								Date of Birth <span>*</span>
+							</p>
+							<span class="icon-case"><i class="fa fa-location-arrow"></i></span>
+							<td th:text="${message.date}"></td>
+							<div class="validation"></div>
+						</div>
+	
+						<div class="form-group">
+							<p>
+								Marital Status <span>*</span>
+							</p>
+							<td th:text="${message.maritialStatus}"></td>
+							<div class="validation"></div>
+						</div>
+						
+						<div class="form-group">
+							<p>
+								Cell Phone <span>*</span>
+							</p>
+							<span class="icon-case"><i class="fa fa-comment-o"></i></span><td th:text="${message.cellPhoneNumber}"></td>
+							<div class="validation"></div>
+						</div>
+						</tr>
+					</div>
+				</div>
+				
+			</fieldset>
+		</form>
+	</div>
+</body>
+<script src="webjars/jquery/2.1.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="../static/js/home.js" th:src="@{js/home.js}"></script>
 </html>

@@ -1,6 +1,10 @@
-package com.artbrain;
+package com.veridic;
 
-import com.artbrain.dao.UserDetailsServiceDAO;
+import com.veridic.dao.KeyDatesServiceDAO;
+import com.veridic.dao.UserDetailsServiceDAO;
+import com.veridic.dao.UserProfileDetailsServiceDAO;
+import com.veridic.dao.AbstractDAO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -32,6 +36,18 @@ public class Application extends WebMvcConfigurerAdapter {
   public UserDetailsService userDetailsService() {
     return new UserDetailsServiceDAO();
   }
+  
+  @Bean
+  public UserDetailsService userProfileDetailsService() {
+    return new UserProfileDetailsServiceDAO();
+  }
+  
+  @Bean
+  public AbstractDAO KeyDatesService()
+  {
+	  return new KeyDatesServiceDAO();
+  }
+  
 
   @Override
   public void addViewControllers(ViewControllerRegistry registry) {
@@ -39,6 +55,8 @@ public class Application extends WebMvcConfigurerAdapter {
     registry.addViewController("/error").setViewName("error");
     registry.addViewController("/profile").setViewName("profile");
     registry.addViewController("/test").setViewName("test");
+    registry.addViewController("/expenses").setViewName("expenses");
+    registry.addViewController("/timesheet").setViewName("timesheet");
   }
 
   @Bean

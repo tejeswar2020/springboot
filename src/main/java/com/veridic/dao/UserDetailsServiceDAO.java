@@ -1,8 +1,8 @@
-package com.artbrain.dao;
+package com.veridic.dao;
 
-import com.artbrain.constants.Queries;
-import com.artbrain.entity.User;
-import com.artbrain.mapper.Mapper;
+import com.veridic.constants.Queries;
+import com.veridic.entity.User;
+import com.veridic.mapper.Mapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -72,7 +72,7 @@ public class UserDetailsServiceDAO implements UserDetailsService {
   }
 
   public enum ROLE {
-    ADMIN("ADMIN"), USER("USER");
+    ADMIN("ADMIN"), USER("USER"), HR("HR"), SUPERADMIN("SUPERADMIN");
 
     private String role;
 

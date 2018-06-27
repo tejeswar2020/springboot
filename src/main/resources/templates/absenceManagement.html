@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8" />
+<title>Home | Veridic Solutions LLc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="webjars/bootstrap/3.2.0/css/bootstrap.min.css"
+	rel="stylesheet" media="screen" />
+<link href="../static/css/styles.css" th:href="@{css/styles.css}"
+	rel="stylesheet" media="screen" />
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Veridic Solutions LLc.</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="/">Home</a></li>
+					<li><a href="/timesheet">Time sheets</a></li>
+					<li><a href="/expenses">Expenses</a></li>
+					<li><a href="/absenceManagement">Absence Management</a></li>
+					<li><a href="#contact"><span
+							sec:authorize="hasRole('ROLE_ADMIN')">Employees</span></a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="./"> <span
+							class="glyphicon glyphicon-th-large"></span></a></li>
+					<li class="dropdown"><a href="./"
+						class="dropdown-toggle" data-toggle="dropdown" role="button"
+						aria-haspopup="true" aria-expanded="false">Logged as : <span
+							sec:authentication="name"></span> <span
+							sec:authorize="hasRole('ROLE_ADMIN')">(Admin)</span> <span
+							sec:authorize="hasRole('ROLE_USER')">(User)</span> <span
+							sec:authorize="hasRole('ROLE_HR')">(HR Manager)</span> <span
+							sec:authorize="hasRole('ROLE_SUPERADMIN')">(Super Admin)</span> <span
+							class="sr-only">(current)</span> <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">My Documents</li>
+							<li role="separator" class="divider"></li>
+							<li><a href="#">Action</a></li>
+							<li><a href="#">Another action</a></li>
+							<li><a href="#">Something else here</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">My Settings</li>
+							<li role="separator" class="divider"></li>
+							<li><a name="header" href="profileDisplay" class="navbar-brand"><span
+									class="glyphicon glyphicon-user"></span> Profile</a></li>
+							<li><a name="header" href="logout" class="navbar-brand"><span
+									class="glyphicon glyphicon-off"></span> Logout</a></li>
+						</ul></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</nav>
+
+	<div class="container">
+		<form>
+			<h1>Consultant Details</h1>
+		</form>
+	</div>
+</body>
+<script src="webjars/jquery/2.1.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="../static/js/home.js" th:src="@{js/home.js}"></script>
+</html>
