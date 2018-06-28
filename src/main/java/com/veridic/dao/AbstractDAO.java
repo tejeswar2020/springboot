@@ -1,5 +1,7 @@
 package com.veridic.dao;
 
+import java.util.List;
+
 public interface AbstractDAO 
 {
 	void saveDataForId(String eid);
@@ -9,8 +11,8 @@ public interface AbstractDAO
 	void updateDataForId(String eid);
 	
 	// FIXME: Think about me again.
-	void getAllData();
+	List getAllData();
 	
-	void getDataForId(String eid);
+	List getDataForId(String eid);
 	
 }

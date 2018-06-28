@@ -39,12 +39,13 @@
 					<li class="dropdown"><a href="./" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false">Logged as : <span
-							sec:authentication="name"></span> <span
-							sec:authorize="hasRole('ROLE_ADMIN')">(Admin)</span> <span
-							sec:authorize="hasRole('ROLE_USER')">(User)</span> <span
-							sec:authorize="hasRole('ROLE_HR')">(HR Manager)</span> <span
-							sec:authorize="hasRole('ROLE_SUPERADMIN')">(Super Admin)</span> <span
-							class="sr-only">(current)</span> <span class="caret"></span></a>
+							sec:authentication="name"></span> 
+							<span sec:authorize="hasRole('ROLE_ADMIN')">(Admin)</span>
+							<span sec:authorize="hasRole('ROLE_USER')">(User)</span>
+							<span sec:authorize="hasRole('ROLE_HR')">(HR Manager)</span>
+							<span sec:authorize="hasRole('ROLE_SUPERADMIN')">(Super Admin)</span>
+							<span class="sr-only">(current)</span>
+							<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li role="separator" class="divider"></li>
 							<li class="dropdown-header">My Documents</li>
@@ -98,32 +99,22 @@
 								</form>
 
 								<div class="col-md-6 col-lg-9 shot_details pt-0">
-									<p class="fw600">
-										Pavan Manikanta Rekapalli <span class="designation"> HR
+									<p class="fw600"><td th:text="${userProfile.firstName}" />, <td th:text="${userProfile.surname}" /><br/><span class="designation"> HR
 											Manager </span>
 										<!-- code for display job title -->
 										<!-- code end for display job title -->
 									</p>
 									<p>Emp-Id : EC120</p>
-									<p class="mobile_no">9378384606</p>
-
-									<p class="email_id">prekapal7@gmail.com</p>
-									<!-- <p class="office_no"><i class="fa fa-phone"></i> : 040 - 23459821</p> -->
-
+									<p class="mobile_no"><td th:text="${userProfile.cellPhoneNumber}" /></p>
+									<p class="email_id"><td th:text="${userProfile.email}" /></p>
 								</div>
-
 								<div
 									class="col-md-12 col-lg-12 shot_details user_description np margin-10t add_custom_scrollbar">
 									<span id="empDescriptionCnt" class="more_text"> </span> <a
-										href="/dashboard_tile_manager/DashboardTiles/add_employee_description"
+										href="#"
 										id="editEmpDescription" class="add-description"
 										title="Add About yourself.">Add About Yourself</a>
 								</div>
-								<!-- code Added by Ayyappa for org short link-->
-								<!--<div class="cl">-->
-
-								<!--</div>-->
-								<!-- code end by Ayyappa for org short link-->
 							</div>
 							<div class="col-md-6 col-lg-9">
 								<div class="col-md-6 pt-0 grablr">
@@ -137,27 +128,23 @@
 										<p class="well nm clearfix">You don't have any status
 											reports to submit</p>
 									</div>
-									<!-- code by ayyappa-->
 									<div class="col-md-12">
 										<h4>Organization Documents</h4>
 										<p class="well nm clearfix">
-											Gives access to the documents shared with you <a
-												href="/employee_self_service_update/organisationalDocuments?module=1"
-												type="3" class="org_doc_link dbBtn pull-right">View
-												Documents</a>
+											Gives access to the documents shared with you
+											<a href="#" type="3" class="org_doc_link dbBtn pull-right">
+												View Documents</a>
 										</p>
-
 									</div>
-									<!-- code end by ayyappa-->
 								</div>
 								<div class="col-md-6 pt-0">
 									<div class="col-md-12 pt-0">
-										<div class="data-table dataTable">
+										<div>
 											<h4>Key Dates</h4>
-											<table width="100%" cellspacing="0" cellpadding="0"	border="0" class="data-table dataTable">
+											<table width="100%" cellspacing="0" cellpadding="0"	border="0" class="table table-hover">
 
 												<thead>
-													<tr>
+													<tr class="info">
 														<th>Type</th>
 														<th>Status</th>
 														<th>Approved From</th>
@@ -165,17 +152,11 @@
 													</tr>
 												</thead>
 												<tbody>
-													<tr>
-														<td>Passport</td>
-														<td>Active</td>
-														<td>07/11/2013</td>
-														<td>06/11/2023</td>
-													</tr>
-													<tr>
-														<td>I-94</td>
-														<td>Active</td>
-														<td>07/30/2014</td>
-														<td>06/18/2019</td>
+													<tr th:each="keydate : ${keyDates}">
+														<td th:text="${keydate.type}"></td>
+														<td th:text="${keydate.status}"></td>
+														<td th:text="${keydate.from}"></td>
+														<td th:text="${keydate.to}"></td>
 													</tr>
 												</tbody>
 											</table>
@@ -187,10 +168,10 @@
 								style="padding-left: 0; padding-right: 0">
 								<h4>Active Placements</h4>
 								<table width="100%" cellspacing="0" cellpadding="0" border="0"
-									class="data-table dataTable">
+									class="table table-hover">
 
 									<thead>
-										<tr>
+										<tr class="info">
 											<th>Job Code</th>
 											<th>Title</th>
 											<th>End Client</th>
@@ -199,18 +180,11 @@
 										</tr>
 									</thead>
 									<tbody>
-
-										<tr>
-											<td>Job Code-185</td>
-											<td>UI Developer</td>
-											<td>Quest Global Services INC</td>
-											<td>01/31/2018</td>
-										</tr>
-										<tr>
-											<td>Job Code-10</td>
-											<td>AWS DevOps Engineer</td>
-											<td>Newstar Corporation LLC</td>
-											<td>06/19/2017</td>
+										<tr th:each="placement : ${placements}">
+											<td th:text="${placement.jobCode}"></td>
+											<td th:text="${placement.title}"></td>
+											<td th:text="${placement.client}"></td>
+											<td th:text="${placement.startDate}"></td>
 										</tr>
 									</tbody>
 								</table>

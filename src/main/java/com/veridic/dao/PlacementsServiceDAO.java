@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.veridic.constants.Queries;
-import com.veridic.entity.KeyDates;
+import com.veridic.entity.Placements;
 import com.veridic.mapper.Mapper;
 
-public class KeyDatesServiceDAO implements AbstractDAO
+public class PlacementsServiceDAO implements AbstractDAO
 {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -36,14 +36,14 @@ public class KeyDatesServiceDAO implements AbstractDAO
 	}
 
 	@Override
-	public List<KeyDates> getAllData() {
+	public List<Placements> getAllData() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<KeyDates> getDataForId(String eid)
+	public List<Placements> getDataForId(String eid)
 	{
-		return jdbcTemplate.query(Queries.LOAD_KEY_DATES_BY_EID, mapper::mapKeyDates, eid);
+		return jdbcTemplate.query(Queries.LOAD_PLACEMENTS_BY_EID, mapper::mapPlacements, eid);
 	}
 }

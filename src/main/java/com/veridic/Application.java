@@ -3,6 +3,7 @@ package com.veridic;
 import com.veridic.dao.KeyDatesServiceDAO;
 import com.veridic.dao.UserDetailsServiceDAO;
 import com.veridic.dao.UserProfileDetailsServiceDAO;
+import com.veridic.dao.PlacementsServiceDAO;
 import com.veridic.dao.AbstractDAO;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,12 +44,17 @@ public class Application extends WebMvcConfigurerAdapter {
   }
   
   @Bean
-  public AbstractDAO KeyDatesService()
+  public KeyDatesServiceDAO KeyDatesService()
   {
 	  return new KeyDatesServiceDAO();
   }
   
-
+  @Bean
+  public PlacementsServiceDAO placementsService()
+  {
+	  return new PlacementsServiceDAO();
+  }
+  
   @Override
   public void addViewControllers(ViewControllerRegistry registry) {
     registry.addViewController("/").setViewName("home");
