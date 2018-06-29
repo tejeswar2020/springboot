@@ -1,6 +1,7 @@
 package com.veridic.mapper;
 
 import com.veridic.entity.KeyDates;
+import com.veridic.entity.Placements;
 import com.veridic.entity.User;
 import com.veridic.entity.UserProfile;
 
@@ -32,7 +33,7 @@ public class Mapper
 	  userProfile.setGender(rs.getString("gender"));
 	  userProfile.setDate(rs.getString("date"));
 	  userProfile.setMaritialStatus(rs.getString("maritialstatus"));
-	  userProfile.setCellPhoneNumber(rs.getString("email"));
+	  userProfile.setCellPhoneNumber(rs.getString("cellPhoneNumber"));
 	  return userProfile;
   }
   
@@ -45,6 +46,17 @@ public class Mapper
 	  keyDates.setFrom(rs.getDate("from"));
 	  keyDates.setTo(rs.getDate("to"));
 	  return keyDates;
+  }
+  
+  public Placements mapPlacements(ResultSet rs, int rowNum) throws SQLException
+  {
+	  Placements placements = new Placements();
+	  placements.setEid(rs.getInt("eid"));
+	  placements.setJobCode(rs.getString("jobCode"));
+	  placements.setTitle(rs.getString("title"));
+	  placements.setClient(rs.getString("client"));
+	  placements.setStartDate(rs.getDate("startDate"));
+	  return placements;
   }
 
 }

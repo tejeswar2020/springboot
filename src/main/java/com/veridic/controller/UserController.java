@@ -1,7 +1,11 @@
 package com.veridic.controller;
 
+import com.veridic.dao.KeyDatesServiceDAO;
+import com.veridic.dao.PlacementsServiceDAO;
 import com.veridic.dao.UserDetailsServiceDAO;
 import com.veridic.dao.UserProfileDetailsServiceDAO;
+import com.veridic.entity.KeyDates;
+import com.veridic.entity.Placements;
 import com.veridic.entity.User;
 import com.veridic.entity.UserProfile;
 
@@ -22,6 +26,12 @@ public class UserController {
   
   @Autowired
   private UserProfileDetailsServiceDAO userProfileDetailsServiceDAO;
+  
+  @Autowired
+  private KeyDatesServiceDAO keyDatesServiceDAO;
+  
+  @Autowired
+  private PlacementsServiceDAO placementsServiceDAO;
 
   @RequestMapping(value = "/registration", method = RequestMethod.POST)
   public String registration(User newUser) {
@@ -64,9 +74,82 @@ public class UserController {
   @RequestMapping(value = "/profileDisplay", method = RequestMethod.GET)
   public ModelAndView profileDisplay() 
   {
-	    System.out.println("invoked ProfileDisplay");
+	  	System.out.println("invoked profileDisplay");
+	    UserProfile userProfile = getUserDetails();
+		
+		ModelAndView mandv = new ModelAndView("/profile");
+		mandv.addObject("messages", userProfile);
+	  	
+		return mandv;
+  }
+
+  @PreAuthorize("isAnonymous()")
+  @RequestMapping(value = "/login", method = RequestMethod.GET)
+  public String loginPage() {
+    return "login";
+  }
+  
+  @RequestMapping(value = {"/home", "/"})
+  public ModelAndView homePage() 
+  {
+	  System.out.println("invoked /home");
+	  ModelAndView mandv = new ModelAndView("/home");
+	  
+	  List<KeyDates> keyDates = getKeyDates();
+	  mandv.addObject("keyDates", keyDates);
+	  
+	  List<Placements> placements = getPlacements();
+	  mandv.addObject("placements", placements);
+	  
+	  UserProfile userProfile = getUserDetails();
+	  mandv.addObject("userProfile", userProfile);
+	  
+	  return mandv;
+  }
+
+  public List<KeyDates> getKeyDates() 
+  {
+	    System.out.println("invoked getKeyDates");
 	 
-	  	UserProfile userProfile = null;
+	    List<KeyDates> keyDates = null;
+		try 
+		{
+			// FIXME: for the String userName param.
+			keyDates = keyDatesServiceDAO.getDataForId("1");
+		} 
+		catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return keyDates;
+  }
+  
+  public List<Placements> getPlacements() 
+  {
+	    System.out.println("invoked getPlacements");
+	 
+	    List<Placements> placements = null;
+		try 
+		{
+			// FIXME: for the String userName param.
+			placements = placementsServiceDAO.getDataForId("1");
+		} 
+		catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return placements;
+  }
+  
+  	private UserProfile getUserDetails() 
+	{
+		System.out.println("invoked getUserDetails");
+	 
+		UserProfile userProfile = null;
 		try 
 		{
 			// FIXME: for the String userName param.
@@ -77,30 +160,7 @@ public class UserController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		 ModelAndView mandv = new ModelAndView("/profile");
-		 mandv.addObject("messages", userProfile);
-	  	
-		return mandv;
-  }
+		return userProfile;
+	}
   
-  @PreAuthorize("isAnonymous()")
-  @RequestMapping(value = "/login", method = RequestMethod.GET)
-  public String loginPage() {
-    return "login";
-  }
-  
-  @RequestMapping(value = "/")
-  public String Page() {
-	  System.out.println("invoked /");
-    return "home";
-  }
-  
-  @RequestMapping(value = "/home")
-  public String homePage() {
-	  System.out.println("invoked /home");
-	  
-	  
-    return "home";
-  }
 }
